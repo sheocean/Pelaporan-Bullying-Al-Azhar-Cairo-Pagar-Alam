@@ -94,6 +94,35 @@
       font-size: 0.85rem;
     }
   </style>
+  <script>
+const form = document.getElementById('reportForm');
+const alertMessage = document.getElementById('alertMessage');
+
+// GANTI DENGAN LINK SCRIPT KAMU SENDIRI
+const scriptURL = "https://script.google.com/macros/s/AKfycbwHWpE722yjuAmz9tzW8BTSbwLkgO__AP4BgfLvmC-4TxeNKhlkvBWjMFuntRtzMvEc/exec";
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const data = {
+    namaPelapor: form.querySelector('[name="namaPelapor"]').value,
+    kelas: form.querySelector('[name="kelas"]').value,
+    namaTerlapor: form.querySelector('[name="namaTerlapor"]').value,
+    deskripsi: form.querySelector('[name="deskripsi"]').value
+  };
+
+  fetch(scriptURL, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    alertMessage.classList.remove('d-none');
+    form.reset();
+  })
+  .catch(error => console.error('Error!', error.message));
+});
+</script>
+
 </head>
 <body>
 
@@ -167,3 +196,4 @@
 
 </body>
 </html>
+
